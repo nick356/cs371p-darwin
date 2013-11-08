@@ -262,8 +262,65 @@ TEST(Creatureinf, infect){
 	Creature hunter(zombie);
 	food.infected(hunter.whtCreat());
 	assert(food.whtCreat().thename()=="zombie");
-
-
 }
 
+TEST(Creatureinf, infect2){
+        Species human("human");
+        Species zombie("zombie");
+	human.addInstruction(0,0);
+        Creature food(human);
+	assert(food.whtCreat().theInstruction(0)=="Hop 0");
+        Creature hunter(zombie);
+        food.infected(hunter.whtCreat());
+        assert(food.whtCreat().thename()=="zombie");
+	assert(food.whtCreat().theInstruction(0)=="That Instruction has not been entered or is unknown.");
+}
 
+TEST(Creatureinf,infect3){
+	Species pink("(>\")>");
+	Species ball("^(\")^");
+	Species that("<(\"<)");
+	Species dances("^(\")^");
+
+	Creature thing1(pink);
+	Creature thing2(ball);
+	Creature thing3(that);
+	Creature thing4(dances);
+
+	thing1.infected(thing4.whtCreat());
+	thing2.infected(thing3.whtCreat());
+	thing4.infected(thing3.whtCreat());
+
+	assert(thing1.whtCreat().thename() == "^(\")^");
+	assert(thing2.whtCreat().thename() == "<(\"<)");
+	assert(thing4.whtCreat().thename() == "<(\"<)");
+}
+
+TEST(Creatureinf, infect4){
+	Species thebeginning("thebeginning");
+	Species theend;
+
+	Creature life(thebeginning);
+	Creature blank(theend);
+	life.infected(blank.whtCreat());
+	assert(life.whtCreat().thename() == " ");
+}
+
+TEST(Creatureinf, infect5){
+	Species human("human");
+        Species zombie("zombie");
+        human.addInstruction(0,0);
+        Creature food(human);
+        assert(food.whtCreat().theInstruction(0)=="Hop 0");
+        Creature hunter(zombie);
+        hunter.infected(food.whtCreat());
+        assert(hunter.whtCreat().thename()=="human");
+        assert(hunter.whtCreat().theInstruction(0)=="Hop 0");
+}
+
+TEST(World, setting){
+	World place(2,2);
+	cout<<"This is width: "<<place.theSizeW()<<endl;
+	assert(place.theSizeW()==2);
+	assert(place.theSizeH()==2);	
+}

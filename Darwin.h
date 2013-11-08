@@ -26,7 +26,7 @@ class Species{
                 return name;
         }
 	
-	string theInstruction(int x){
+	string theInstruction(unsigned int x){
 		if(x>=move.size())
 			return "That Instruction has not been entered or is unknown.";
 		int temp = move[x][0];
@@ -130,11 +130,33 @@ class World{
         
    public:      
         World(int height, int width){
-        vector<Creature> temp2 (width,Creature());
-//      theWorld(height);       
-//
-        vector<vector<Creature> > theWorld(height,temp2);
+        vector<Creature> temp2 (height,Creature());
+	for(int i=0;i<width;i++){
+		theWorld.push_back(temp2);
+	}
+
+        
+	cout<<"This is the width of the World: "<<theWorld.size()<<endl;
     }
 
+	string theMap(){
+		int x=theWorld.size();
+		int y=theWorld[0].size();
+		string map="";
+		for(int i=0;i<x;i++){
+			for(int j=0;j<y;j++)
+				map+="| "+theWorld[x][y].whtCreat().thename()+" |";
+			map+="\n";
+		}
+		return map;	
+
+	}
+
+	int theSizeW(){
+		return theWorld.size();
+	}
+	int theSizeH(){
+		return theWorld[0].size();
+	}
 };
 #endif

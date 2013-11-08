@@ -1,0 +1,44 @@
+#include <cassert> // assert
+#include <cstdlib> // rand, srand
+#include <iostream> // cout, endl
+#include <stdexcept> // invalid_argument, out_of_range
+
+#define HOP=0;
+#define LEFT=1;
+#define RIGHT=2;
+#define INFECT=3;
+#define IF_EMPTY=4;
+#define IF_WALL=5;
+#define IF_RAND=6;
+#define IF_ENEMY=7;
+#define GO=8;
+
+
+using namespace std;
+
+class Species{
+
+   string name;
+   int species;
+   int programCout=0;
+   bool turntaken=false;
+   int move[9];
+
+   Species(string x){
+	name=x;
+   }
+
+   addInstruction(int x,int y){
+	instruction[x]=true;
+	
+		
+   }
+
+
+
+
+
+
+
+
+}
