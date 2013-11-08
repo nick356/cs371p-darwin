@@ -1,0 +1,24 @@
+Running main() from gtest_main.cc
+[==========] Running 6 tests from 2 test cases.
+[----------] Global test environment set-up.
+[----------] 4 tests from Species
+[ RUN      ] Species.name1
+[       OK ] Species.name1 (20 ms)
+[ RUN      ] Species.name2
+[       OK ] Species.name2 (3 ms)
+[ RUN      ] Species.name3
+[       OK ] Species.name3 (3 ms)
+[ RUN      ] Species.name4
+[       OK ] Species.name4 (6 ms)
+[----------] 4 tests from Species (48 ms total)
+
+[----------] 2 tests from Species2
+[ RUN      ] Species2.construct
+[       OK ] Species2.construct (4 ms)
+[ RUN      ] Species2.construct2
+[       OK ] Species2.construct2 (4 ms)
+[----------] 2 tests from Species2 (8 ms total)
+
+[----------] Global test environment tear-down
+[==========] 6 tests from 2 test cases ran. (101 ms total)
+[  PASSED  ] 6 tests.
