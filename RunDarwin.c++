@@ -25,18 +25,30 @@ doxygen Doxyfile
 // --------
 // includes
 // --------
-
+#include <stdio.h>
 #include <cassert> // assert
 #include <cstdlib> // rand, srand
 #include <iostream> // cout, endl
 #include <stdexcept> // invalid_argument, out_of_range
+#include "Darwin.h"
+
+#define HOP 0
+#define LEFT 1
+#define RIGHT 2
+#define INFECT 3
+#define IF_EMPTY 4
+#define IF_WALL 5
+#define IF_RAND 6
+#define IF_ENEMY 7
+#define GO 8
+
 
 // ----
 // main
 // ----
 
 int main () {
-    using namespace std;
+	using namespace std;
 
     // ----
     // food
@@ -47,6 +59,11 @@ int main () {
 1: go 0
 */
 
+	Species food("f");
+	food.addInstruction(LEFT,0);
+	food.addInstruction(GO,0);
+    
+
     // ------
     // hopper
     // ------
@@ -55,7 +72,9 @@ int main () {
 0: hop
 1: go 0
 */
-
+	Species hopper("h");
+	food.addInstruction(HOP,0);
+	food.addInstruction(GO,0);
     // -----
     // rover
     // -----
@@ -74,6 +93,20 @@ int main () {
 10: go 0
 */
 
+	Species rover("r");
+	rover.addInstruction(IF_ENEMY,9);
+	rover.addInstruction(IF_EMPTY,7);
+	rover.addInstruction(IF_RAND,5);
+	rover.addInstruction(LEFT,0);
+	rover.addInstruction(GO,0);
+	rover.addInstruction(RIGHT,0);
+	rover.addInstruction(GO,0);
+	rover.addInstruction(HOP,0);
+	rover.addInstruction(GO,0);
+	rover.addInstruction(INFECT,0);
+	rover.addInstruction(GO,0);
+		
+
     // ----
     // trap
     // ----
@@ -85,6 +118,13 @@ int main () {
 3: infect
 4: go 0
 */
+
+	Species trap("t");
+	trap.addInstruction(IF_ENEMY,3);
+	trap.addInstruction(LEFT,0);
+	trap.addInstruction(GO,0);
+	trap.addInstruction(INFECT,0);
+	trap.addInstruction(GO,0);
 
     // ----------
     // darwin 8x8
@@ -190,5 +230,4 @@ Print every 100th grid after that (i.e. 100, 200, 300...1000).
         assert(false);}
     catch (const out_of_range&) {
         assert(false);}
-
     return 0;}

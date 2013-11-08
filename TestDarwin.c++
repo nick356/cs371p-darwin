@@ -401,3 +401,57 @@ TEST(Worldpl,place3){
 	assert(map.getName(2,3)=="c");
 
 }
+
+TEST(Worldpl,place4){
+	World map(8,5);
+	Species dog("d");
+        Species cat("c");
+        Creature thing(dog);
+        Creature thing2(dog);
+        Creature thing3(dog);
+        Creature thing4(dog);
+        Creature stuff(cat);
+        Creature stuff2(cat);
+        Creature stuff3(cat);
+
+        map.setCreat(thing, 0, 0);
+        map.setCreat(thing2,1,1);
+        map.setCreat(thing3,2,2);
+        map.setCreat(thing4,3,3);
+        map.setCreat(stuff,0,1);
+        map.setCreat(stuff2,1,2);
+        map.setCreat(stuff3,4,7);
+        assert(map.getName(0,0)=="d");
+        assert(map.getName(4,7)=="c");
+        assert(map.getName(2,2)=="d");
+
+
+}
+
+TEST(Worldpl,place5){
+	World map(5,5);
+	Species dog("d");
+	Species cat("c");
+
+	Creature thing(dog);
+	Creature thing2(dog);
+	Creature stuff(cat);
+	Creature stuff2(cat);
+
+	map.setCreat(thing,4,4);
+	map.setCreat(thing2,0,0);
+	map.setCreat(stuff,0,4);
+	map.setCreat(stuff2,4,0);
+
+	assert(map.getName(0,0)=="d");
+	assert(map.getName(4,4)=="d");
+	assert(map.getName(0,4)=="c");
+	assert(map.getName(4,0)=="c");
+}
+
+TEST(Worldpl,place6){
+
+	World map(1,1);
+	
+
+}
