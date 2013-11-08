@@ -1,0 +1,18 @@
+commit 074da06497ac91d27d031e639d14ae5e85a811fd
+Merge: 6b859c3 dd133fc
+Author: Nicholas Carter <nick356@cs.utexas.edu>
+Date:   Tue Nov 5 14:01:58 2013 -0600
+
+    Merge branch 'master' of github.com:nick356/cs371p-darwin
+
+commit 6b859c3f630bf0ccd74aa3aefc770b39251a1832
+Author: Nicholas Carter <nick356@cs.utexas.edu>
+Date:   Tue Nov 5 13:59:45 2013 -0600
+
+    These are the initial files we are given
+
+commit dd133fcb22eab0f987fd12a88fa9fd2d6aed7dc3
+Author: nick356 <nac568@utexas.edu>
+Date:   Tue Nov 5 11:57:41 2013 -0800
+
+    Initial commit

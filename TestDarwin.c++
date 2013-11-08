@@ -18,7 +18,7 @@ To test the program:
 #include "Darwin.h"
 #include "gtest/gtest.h"
 
-
+#define HOP = 0;
 
 using namespace std;
 
@@ -63,3 +63,207 @@ TEST(Species2, construct2){
 	assert(temp.thename() != temp2.thename());
 
 }
+
+TEST(Species2, construct3){
+	Species temp("kf kfl");
+	Species temp2("kf kfl");
+	assert(temp.thename() == temp2.thename());
+}
+
+TEST(Species3, Instruction){
+	Species temp("Dog");
+	temp.addInstruction(0,0);
+	assert(temp.theInstruction(0) == "Hop 0");
+
+}
+
+TEST(Species3, Instruction2){
+	Species temp("Cat");
+	Species dog("Dog");
+	temp.addInstruction(0,0);
+	dog.addInstruction(3,0);
+	assert(temp.theInstruction(0) == "Hop 0");
+	assert(dog.theInstruction(0) == "Infect 0");
+}
+
+TEST(Species3, Instruction3){
+	Species cat("Cat");
+	cat.addInstruction(4,3);
+	cat.addInstruction(5,4);
+	cat.addInstruction(8,0);
+	cat.addInstruction(0,0);
+	cat.addInstruction(1,0);
+	assert(cat.theInstruction(0) =="If_Empty 3");
+	assert(cat.theInstruction(4) =="Left 0");
+
+}
+
+TEST(Species3, Instruction4){
+	Species cat("Cat");
+        cat.addInstruction(4,3);
+	Species dog("Dog");
+        dog.addInstruction(3,0);
+	cat.addInstruction(3,0);
+	assert(dog.theInstruction(0) == "Infect 0");
+	assert(cat.theInstruction(1) == "Infect 0");
+	assert(cat.theInstruction(0) == "If_Empty 3");	
+
+}
+
+TEST(Species3, Instruction5){
+	Species c("c");
+	Species cat("Cat");
+	c.addInstruction(0,0);
+	cat.addInstruction(0,0);
+	assert(c.theInstruction(0)==cat.theInstruction(0));
+
+}
+
+TEST(Species3, Instruction6){
+	Species thing;
+	thing.addInstruction(10,9);
+	assert(thing.theInstruction(0) == "That Instruction has not been entered or is unknown.");
+}
+
+TEST(Creature, construct){
+	Creature thing;
+	assert(thing.theDirection()=="West");
+	assert(thing.prognum()==0);
+	assert(thing.whtCreat().thename()==" ");
+
+}
+
+TEST(Creature, construct2){
+	Species dog("Dog");
+	Creature thing(dog);
+        assert(thing.theDirection()=="West");
+        assert(thing.prognum()==0);
+        assert(thing.whtCreat().thename()=="Dog");
+}
+
+TEST(Creature, construct3){
+	Species dog("Dog");
+	dog.addInstruction(0,0);
+	Creature thing(dog);
+	assert(thing.whtCreat().thename()=="Dog");
+	assert(thing.whtCreat().theInstruction(0)=="Hop 0");
+
+}
+
+TEST(Creature, construct4){
+	Species dog("Dog");
+	Species cat("Cat");
+	Creature thing(dog);
+	Creature thing2(cat);
+	assert(thing.whtCreat().thename()!=thing2.whtCreat().thename());
+	assert(thing.whtCreat().thename() == "Dog");
+	assert(thing2.whtCreat().thename() == "Cat");
+
+}
+
+TEST(Creature, construct5){
+	Species dog("Dog");
+	Creature thing(dog);
+	Creature thing2(dog);
+	assert(thing.whtCreat().thename() ==thing2.whtCreat().thename());
+}
+
+TEST(Creature, construct6){
+	Species dog("d");
+	dog.addInstruction(0,0);
+	dog.addInstruction(1,0);
+	Creature thing(dog);
+	dog.addInstruction(2,0);
+	assert(thing.whtCreat().theInstruction(2) == "That Instruction has not been entered or is unknown.");
+}
+
+TEST(Creature,construct7){
+	Species dog("d");
+        dog.addInstruction(0,0);
+        dog.addInstruction(1,0);
+        dog.addInstruction(2,0);
+        Creature thing(dog);
+	assert(thing.whtCreat().theInstruction(2)=="Right 0");
+
+
+}
+
+TEST(Creature, construct8){
+	Species dog("dog");
+	Creature thing(dog, 0);
+	assert(thing.theDirection()=="West");	
+
+
+}
+
+TEST(Creature, construct9){
+	Species dog("dog");
+	Creature thing(dog,1);
+	assert(thing.theDirection()=="North");
+}
+
+TEST(Creature, construct10){
+	Species dog("dog");
+	Creature thing(dog,2);
+	assert(thing.theDirection()=="East");
+}
+
+TEST(Creature,construct11){
+	Species dog("dog");
+	Creature thing(dog,3);
+	assert(thing.theDirection()=="South");
+}
+
+TEST(Creature,construct12){
+	Species dog("dog");
+	Creature thing(dog,4);
+	assert(thing.theDirection()=="That is not a direction");
+}
+
+TEST(Creaturedir, direction){
+	Species dog("dog");
+	Creature thing(dog,0);
+	assert(thing.changeFace(0));
+	assert(thing.theDirection() =="West");
+}
+
+TEST(Creaturedir,direction2){
+	Species dog("dog");
+	Creature thing(dog,0);
+        assert(thing.changeFace(1));
+	assert(thing.theDirection()=="North");
+}
+
+TEST(Creaturedir,direction3){
+        Species dog("dog");
+        Creature thing(dog,0);
+        assert(thing.changeFace(2));
+        assert(thing.theDirection()=="East");
+}
+
+TEST(Creaturedir,direction4){
+        Species dog("dog");
+        Creature thing(dog,0);
+        assert(thing.changeFace(3));
+        assert(thing.theDirection()=="South");
+}
+
+TEST(Creaturedir,direction5){
+        Species dog("dog");
+        Creature thing(dog,0);
+        assert(!thing.changeFace(4));
+	assert(thing.theDirection()=="West");
+}
+
+TEST(Creatureinf, infect){
+	Species human("human");
+	Species zombie("zombie");
+	Creature food(human);
+	Creature hunter(zombie);
+	food.infected(hunter.whtCreat());
+	assert(food.whtCreat().thename()=="zombie");
+
+
+}
+
+

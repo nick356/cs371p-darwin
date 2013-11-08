@@ -2,13 +2,14 @@
 #define Darwin_h
 #include <iostream> // istream, ostream
 #include <vector>
+
 using namespace std;
 class Species{
 
    private:
         string name;
         vector < vector <int> > move;
-
+	
    public:
          Species(string x=" "){
                 name=x;
@@ -24,6 +25,36 @@ class Species{
         string thename(){
                 return name;
         }
+	
+	string theInstruction(int x){
+		if(x>=move.size())
+			return "That Instruction has not been entered or is unknown.";
+		int temp = move[x][0];
+		switch(temp){
+			case 0:
+				return "Hop "+to_string(move[x][1]);
+			case 1:
+				return "Left "+to_string(move[x][1]);
+			case 2:
+				return "Right "+to_string(move[x][1]);
+			case 3:
+				return "Infect "+to_string(move[x][1]);	
+			case 4:
+				return "If_Empty "+to_string(move[x][1]);
+			case 5:
+				return "If_Wall "+to_string(move[x][1]);
+			case 6:
+				return "If_Rand "+to_string(move[x][1]);
+			case 7:
+				return "If_Enemy "+to_string(move[x][1]);
+			case 8:
+				return "Go "+to_string(move[x][1]);
+			default:
+				return "That Instruction has not been entered or is unknown.";
+
+		}
+		return "If you are here something horrible has happened!";
+	}
 
 
 };
@@ -37,25 +68,22 @@ class Creature{
         int progcout;
 
    public:
-        Creature(){
-                direction=0;
-                progcout=0;
-                theSpeci=Species();
 
-        }
-
-        Creature(Species x){
+        Creature(Species x=Species(), int y=0){
                 theSpeci=x;
                 progcout=0;
-                direction=0;
+                direction=y;
         }
    
         bool changeFace(int x){
-                direction=x;
-                if(direction==x)
-                        return true;
-                else
-                        return false;
+		if(x==0 || x==1 || x==2 || x==3){
+                	direction=x;
+                	if(direction==x)
+                        	return true;
+			else return false;
+		}
+		else
+			return false;
         }
 
         bool infected(Species x){
@@ -66,7 +94,32 @@ class Creature{
                         return true;
                 else
                         return false; 
-        }  
+        }
+
+	string theDirection(){
+		switch(direction){
+			case 0:
+				return "West";
+			case 1:
+				return "North";
+			case 2:
+				return "East";
+			case 3:
+				return "South";
+			default:
+				return "That is not a direction";
+		}
+		return "If you are here you have a problem";
+
+	} 
+
+	int prognum(){
+		return progcout;
+	}
+
+	Species whtCreat(){
+		return theSpeci;
+	} 
 };
 
 
