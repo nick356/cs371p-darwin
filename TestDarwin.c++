@@ -52,7 +52,7 @@ TEST(Species,name4){
 TEST(Species2, construct){
 	Species temp;
 	assert(temp.thename() != "Akbar");
-	assert(temp.thename() == " ");
+	assert(temp.thename() == ".");
 
 }
 
@@ -129,7 +129,7 @@ TEST(Creature, construct){
 	Creature thing;
 	assert(thing.theDirection()=="West");
 	assert(thing.prognum()==0);
-	assert(thing.whtCreat().thename()==" ");
+	assert(thing.whtCreat().thename()==".");
 
 }
 
@@ -303,7 +303,7 @@ TEST(Creatureinf, infect4){
 	Creature life(thebeginning);
 	Creature blank(theend);
 	life.infected(blank.whtCreat());
-	assert(life.whtCreat().thename() == " ");
+	assert(life.whtCreat().thename() == ".");
 }
 
 TEST(Creatureinf, infect5){
@@ -320,7 +320,84 @@ TEST(Creatureinf, infect5){
 
 TEST(World, setting){
 	World place(2,2);
-	cout<<"This is width: "<<place.theSizeW()<<endl;
 	assert(place.theSizeW()==2);
 	assert(place.theSizeH()==2);	
+}
+
+TEST(World, setting2){
+	World place(10,10);
+	assert(place.theSizeW()==10);
+	assert(place.theSizeH()==10);
+}
+
+TEST(World, setting3){
+	World place(5,10);
+	assert(place.theSizeW()==10);
+	assert(place.theSizeH()==5);
+
+}
+
+TEST(World, setting4){
+	World place(1,5);
+	assert(place.theSizeW()==5);
+	assert(place.theSizeH()==1);
+	
+}
+
+TEST(World, setting5){
+	World place(6,50);
+	assert(place.theSizeW()==50);
+	assert(place.theSizeH()==6);
+
+
+}
+
+TEST(Worldpl, place){
+	World map(2,2);
+	Species dog("d");
+	Species cat("c");
+	Creature thing(dog);
+	Creature thing2(cat);
+
+	map.setCreat(thing, 0, 0);
+	map.setCreat(thing2,1,1);	
+	assert(map.getName(0,0)=="d");
+	assert(map.getName(1,1)=="c");
+}
+
+TEST(Worldpl, place2){
+	World map(10,10);
+	Species dog("d");
+	Species cat("c");
+	Creature thing(dog);
+	Creature thing2(dog);
+	Creature thing3(dog);
+	Creature thing4(dog);
+	Creature stuff(cat);
+	Creature stuff2(cat);
+	Creature stuff3(cat);
+
+	map.setCreat(thing, 0, 0);
+	map.setCreat(thing2,1,1);
+	map.setCreat(thing3,2,2);
+	map.setCreat(thing4,3,3);
+	map.setCreat(stuff,0,1);
+	map.setCreat(stuff2,1,2);
+	map.setCreat(stuff3,5,7);
+	assert(map.getName(0,0)=="d");
+	assert(map.getName(5,7)=="c");
+	assert(map.getName(2,2)=="d");
+
+}
+
+TEST(Worldpl,place3){
+	World map(7,3);
+	Species dog("d");
+	Species cat("c");
+	map.setCreat(dog,0,6);
+	map.setCreat(cat,2,3);
+
+	assert(map.getName(0,6)=="d");
+	assert(map.getName(2,3)=="c");
+
 }

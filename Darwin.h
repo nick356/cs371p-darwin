@@ -11,7 +11,7 @@ class Species{
         vector < vector <int> > move;
 	
    public:
-         Species(string x=" "){
+         Species(string x="."){
                 name=x;
         }
 
@@ -130,33 +130,40 @@ class World{
         
    public:      
         World(int height, int width){
-        vector<Creature> temp2 (height,Creature());
+	Species x;
+	vector<Creature> temp2(height,Creature(x));
 	for(int i=0;i<width;i++){
 		theWorld.push_back(temp2);
 	}
 
-        
-	cout<<"This is the width of the World: "<<theWorld.size()<<endl;
     }
-
-	string theMap(){
+//Used this at first but checking the results were difficult, not sure why, don't have time to figure out.
+/*	string theMap(){
 		int x=theWorld.size();
 		int y=theWorld[0].size();
 		string map="";
 		for(int i=0;i<x;i++){
-			for(int j=0;j<y;j++)
-				map+="| "+theWorld[x][y].whtCreat().thename()+" |";
+			for(int j=0;j<y;j++){
+				map+=theWorld[i][j].whtCreat().thename();
+			}
 			map+="\n";
 		}
 		return map;	
 
-	}
-
+	}*/
+	//Checks Width
 	int theSizeW(){
 		return theWorld.size();
 	}
+	//Checks Height
 	int theSizeH(){
 		return theWorld[0].size();
+	}
+	void setCreat(Creature z, int x, int y){
+		theWorld[x][y].infected(z.whtCreat());
+	}
+	string getName(int x, int y){
+		return theWorld[x][y].whtCreat().thename();
 	}
 };
 #endif

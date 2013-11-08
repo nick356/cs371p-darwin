@@ -1,5 +1,5 @@
 Running main() from gtest_main.cc
-[==========] Running 36 tests from 7 test cases.
+[==========] Running 43 tests from 8 test cases.
 [----------] Global test environment set-up.
 [----------] 4 tests from Species
 [ RUN      ] Species.name1
@@ -16,35 +16,35 @@ Running main() from gtest_main.cc
 [ RUN      ] Species2.construct
 [       OK ] Species2.construct (4 ms)
 [ RUN      ] Species2.construct2
-[       OK ] Species2.construct2 (5 ms)
+[       OK ] Species2.construct2 (4 ms)
 [ RUN      ] Species2.construct3
 [       OK ] Species2.construct3 (5 ms)
 [----------] 3 tests from Species2 (14 ms total)
 
 [----------] 6 tests from Species3
 [ RUN      ] Species3.Instruction
-[       OK ] Species3.Instruction (53 ms)
+[       OK ] Species3.Instruction (52 ms)
 [ RUN      ] Species3.Instruction2
-[       OK ] Species3.Instruction2 (7 ms)
+[       OK ] Species3.Instruction2 (6 ms)
 [ RUN      ] Species3.Instruction3
-[       OK ] Species3.Instruction3 (12 ms)
+[       OK ] Species3.Instruction3 (13 ms)
 [ RUN      ] Species3.Instruction4
-[       OK ] Species3.Instruction4 (7 ms)
+[       OK ] Species3.Instruction4 (6 ms)
 [ RUN      ] Species3.Instruction5
 [       OK ] Species3.Instruction5 (5 ms)
 [ RUN      ] Species3.Instruction6
 [       OK ] Species3.Instruction6 (4 ms)
-[----------] 6 tests from Species3 (88 ms total)
+[----------] 6 tests from Species3 (87 ms total)
 
 [----------] 12 tests from Creature
 [ RUN      ] Creature.construct
-[       OK ] Creature.construct (21 ms)
+[       OK ] Creature.construct (20 ms)
 [ RUN      ] Creature.construct2
-[       OK ] Creature.construct2 (6 ms)
+[       OK ] Creature.construct2 (5 ms)
 [ RUN      ] Creature.construct3
 [       OK ] Creature.construct3 (11 ms)
 [ RUN      ] Creature.construct4
-[       OK ] Creature.construct4 (10 ms)
+[       OK ] Creature.construct4 (9 ms)
 [ RUN      ] Creature.construct5
 [       OK ] Creature.construct5 (6 ms)
 [ RUN      ] Creature.construct6
@@ -58,22 +58,22 @@ Running main() from gtest_main.cc
 [ RUN      ] Creature.construct10
 [       OK ] Creature.construct10 (5 ms)
 [ RUN      ] Creature.construct11
-[       OK ] Creature.construct11 (5 ms)
+[       OK ] Creature.construct11 (4 ms)
 [ RUN      ] Creature.construct12
 [       OK ] Creature.construct12 (4 ms)
-[----------] 12 tests from Creature (92 ms total)
+[----------] 12 tests from Creature (90 ms total)
 
 [----------] 5 tests from Creaturedir
 [ RUN      ] Creaturedir.direction
 [       OK ] Creaturedir.direction (4 ms)
 [ RUN      ] Creaturedir.direction2
-[       OK ] Creaturedir.direction2 (4 ms)
+[       OK ] Creaturedir.direction2 (5 ms)
 [ RUN      ] Creaturedir.direction3
-[       OK ] Creaturedir.direction3 (5 ms)
+[       OK ] Creaturedir.direction3 (4 ms)
 [ RUN      ] Creaturedir.direction4
 [       OK ] Creaturedir.direction4 (4 ms)
 [ RUN      ] Creaturedir.direction5
-[       OK ] Creaturedir.direction5 (4 ms)
+[       OK ] Creaturedir.direction5 (5 ms)
 [----------] 5 tests from Creaturedir (23 ms total)
 
 [----------] 5 tests from Creatureinf
@@ -82,20 +82,35 @@ Running main() from gtest_main.cc
 [ RUN      ] Creatureinf.infect2
 [       OK ] Creatureinf.infect2 (10 ms)
 [ RUN      ] Creatureinf.infect3
-[       OK ] Creatureinf.infect3 (14 ms)
+[       OK ] Creatureinf.infect3 (15 ms)
 [ RUN      ] Creatureinf.infect4
-[       OK ] Creatureinf.infect4 (8 ms)
+[       OK ] Creatureinf.infect4 (7 ms)
 [ RUN      ] Creatureinf.infect5
 [       OK ] Creatureinf.infect5 (10 ms)
 [----------] 5 tests from Creatureinf (52 ms total)
 
-[----------] 1 test from World
+[----------] 5 tests from World
 [ RUN      ] World.setting
-This is the width of the World: 2
-This is width: 2
-[       OK ] World.setting (55 ms)
-[----------] 1 test from World (55 ms total)
+[       OK ] World.setting (43 ms)
+[ RUN      ] World.setting2
+[       OK ] World.setting2 (5 ms)
+[ RUN      ] World.setting3
+[       OK ] World.setting3 (3 ms)
+[ RUN      ] World.setting4
+[       OK ] World.setting4 (3 ms)
+[ RUN      ] World.setting5
+[       OK ] World.setting5 (7 ms)
+[----------] 5 tests from World (63 ms total)
+
+[----------] 3 tests from Worldpl
+[ RUN      ] Worldpl.place
+[       OK ] Worldpl.place (11 ms)
+[ RUN      ] Worldpl.place2
+[       OK ] Worldpl.place2 (21 ms)
+[ RUN      ] Worldpl.place3
+[       OK ] Worldpl.place3 (9 ms)
+[----------] 3 tests from Worldpl (42 ms total)
 
 [----------] Global test environment tear-down
-[==========] 36 tests from 7 test cases ran. (419 ms total)
-[  PASSED  ] 36 tests.
+[==========] 43 tests from 8 test cases ran. (465 ms total)
+[  PASSED  ] 43 tests.
