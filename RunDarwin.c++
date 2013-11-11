@@ -175,7 +175,6 @@ Print every grid.
 
     try {
         cout << "*** Darwin 7x9 ***" << endl;
-        srand(0);
         /*
 7x9 Darwin
 Trap, facing south, at (0, 0)
@@ -184,7 +183,20 @@ Rover, facing north, at (5, 4)
 Trap, facing west, at (6, 8)
 Simulate 5 moves.
 Print every grid.
-*/
+*/    
+	World themap2(9,7);
+	Creature tr(trap);
+	Creature tr2(trap);
+	Creature hr(hopper);
+	Creature rv(rover);
+
+	themap2.setCreat(tr,SOUTH,0,0);
+	themap2.setCreat(hr,EAST,3,2);
+	themap2.setCreat(rv,NORTH,5,4);
+	themap2.setCreat(tr2,WEST,6,8);
+	Darwin temp2(5,themap2);
+	srand(0);
+	temp2.runGame();
         }
     catch (const invalid_argument&) {
         assert(false);}

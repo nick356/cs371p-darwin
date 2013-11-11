@@ -168,7 +168,7 @@ class World{
 
       private:
         vector<vector<Creature> > theWorld;
-        
+ 
    public:      
         World(int height=0, int width=0){
 	Species x;
@@ -225,15 +225,16 @@ class World{
 			if(face=="West" && (y>0)){
 				theWorld[x][y-1]=theWorld[x][y];
 				theWorld[x][y].infected();
-			}else if(face=="East" && (y<theWorld.size()-1)){
+			}else if(face=="East" && (y<theWorld[x].size()-1)){
 				theWorld[x][y+1]=theWorld[x][y];
 				theWorld[x][y].infected();
 			}else if(face=="North" && (x>0)){
 				theWorld[x-1][y]=theWorld[x][y];
 				theWorld[x][y].infected();
-			}else if(face=="South" && (x<theWorld[x].size()-1)){
+			}else if(face=="South" && (x<theWorld.size()-1)){
 				theWorld[x+1][y]=theWorld[x][y];
 				theWorld[x][y].infected();
+			}else{
 			}
 		}else if(instruction==1){
 			string face=theWorld[x][y].theDirection();
@@ -271,7 +272,7 @@ class World{
                                 theWorld[x][y+1].infected(theWorld[x][y].whtCreat());
                         }else if(face=="North" && x>0){
                                 theWorld[x-1][y].infected(theWorld[x][y].whtCreat());
-                        }else if(face=="South" && (x<theWorld[x].size()-1)){
+                        }else if(face=="South" && (x<theWorld.size()-1)){
                                 theWorld[x+1][y].infected(theWorld[x][y].whtCreat());
                         }    
 		}else if(instruction==4){
@@ -282,7 +283,7 @@ class World{
 				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
                         }else if(face=="North" && (x>0) && (theWorld[x-1][y].whtCreat().thename()==".")){
 				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
-                        }else if(face=="South"&& (x<theWorld[x].size()-1) && (theWorld[x+1][y].whtCreat().thename()==".")){
+                        }else if(face=="South"&& (x<theWorld.size()-1) && (theWorld[x+1][y].whtCreat().thename()==".")){
 				 theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
                         }else{
 				theWorld[x][y].pronum();

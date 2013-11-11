@@ -30,14 +30,15 @@ class Darwin{
 
 			for(int i=0;i<map.theSizeW();i++){
 				for(int j=0;j<map.theSizeH();j++){
-					while(map.getCreatu(i,j).whtrn()<tempturn)
+					while(map.getCreatu(i,j).whtrn()<tempturn){
+						
 						map.takeTurn(i,j);
+					}
 
 				}
 
 			}
-
-			for(int i=0;i<map.theSizeW();i++)
+			for(int i=0;i<map.theSizeH();i++)
 				cout<<i;
 
 			cout<<endl;

@@ -10,7 +10,7 @@ Running main() from gtest_main.cc
 [       OK ] Species.name3 (3 ms)
 [ RUN      ] Species.name4
 [       OK ] Species.name4 (6 ms)
-[----------] 4 tests from Species (48 ms total)
+[----------] 4 tests from Species (47 ms total)
 
 [----------] 3 tests from Species2
 [ RUN      ] Species2.construct
@@ -18,14 +18,14 @@ Running main() from gtest_main.cc
 [ RUN      ] Species2.construct2
 [       OK ] Species2.construct2 (4 ms)
 [ RUN      ] Species2.construct3
-[       OK ] Species2.construct3 (6 ms)
+[       OK ] Species2.construct3 (5 ms)
 [----------] 3 tests from Species2 (14 ms total)
 
 [----------] 6 tests from Species3
 [ RUN      ] Species3.Instruction
-[       OK ] Species3.Instruction (53 ms)
+[       OK ] Species3.Instruction (52 ms)
 [ RUN      ] Species3.Instruction2
-[       OK ] Species3.Instruction2 (6 ms)
+[       OK ] Species3.Instruction2 (7 ms)
 [ RUN      ] Species3.Instruction3
 [       OK ] Species3.Instruction3 (12 ms)
 [ RUN      ] Species3.Instruction4
@@ -34,17 +34,17 @@ Running main() from gtest_main.cc
 [       OK ] Species3.Instruction5 (5 ms)
 [ RUN      ] Species3.Instruction6
 [       OK ] Species3.Instruction6 (4 ms)
-[----------] 6 tests from Species3 (88 ms total)
+[----------] 6 tests from Species3 (87 ms total)
 
 [----------] 12 tests from Creature
 [ RUN      ] Creature.construct
-[       OK ] Creature.construct (21 ms)
+[       OK ] Creature.construct (20 ms)
 [ RUN      ] Creature.construct2
 [       OK ] Creature.construct2 (5 ms)
 [ RUN      ] Creature.construct3
-[       OK ] Creature.construct3 (12 ms)
+[       OK ] Creature.construct3 (11 ms)
 [ RUN      ] Creature.construct4
-[       OK ] Creature.construct4 (9 ms)
+[       OK ] Creature.construct4 (10 ms)
 [ RUN      ] Creature.construct5
 [       OK ] Creature.construct5 (6 ms)
 [ RUN      ] Creature.construct6
@@ -60,12 +60,12 @@ Running main() from gtest_main.cc
 [ RUN      ] Creature.construct11
 [       OK ] Creature.construct11 (5 ms)
 [ RUN      ] Creature.construct12
-[       OK ] Creature.construct12 (5 ms)
+[       OK ] Creature.construct12 (4 ms)
 [----------] 12 tests from Creature (91 ms total)
 
 [----------] 5 tests from Creaturedir
 [ RUN      ] Creaturedir.direction
-[       OK ] Creaturedir.direction (5 ms)
+[       OK ] Creaturedir.direction (4 ms)
 [ RUN      ] Creaturedir.direction2
 [       OK ] Creaturedir.direction2 (4 ms)
 [ RUN      ] Creaturedir.direction3
@@ -78,7 +78,7 @@ Running main() from gtest_main.cc
 
 [----------] 5 tests from Creatureinf
 [ RUN      ] Creatureinf.infect
-[       OK ] Creatureinf.infect (9 ms)
+[       OK ] Creatureinf.infect (10 ms)
 [ RUN      ] Creatureinf.infect2
 [       OK ] Creatureinf.infect2 (10 ms)
 [ RUN      ] Creatureinf.infect3
@@ -87,11 +87,11 @@ Running main() from gtest_main.cc
 [       OK ] Creatureinf.infect4 (7 ms)
 [ RUN      ] Creatureinf.infect5
 [       OK ] Creatureinf.infect5 (10 ms)
-[----------] 5 tests from Creatureinf (51 ms total)
+[----------] 5 tests from Creatureinf (52 ms total)
 
 [----------] 5 tests from World
 [ RUN      ] World.setting
-[       OK ] World.setting (43 ms)
+[       OK ] World.setting (44 ms)
 [ RUN      ] World.setting2
 [       OK ] World.setting2 (5 ms)
 [ RUN      ] World.setting3
@@ -100,15 +100,15 @@ Running main() from gtest_main.cc
 [       OK ] World.setting4 (3 ms)
 [ RUN      ] World.setting5
 [       OK ] World.setting5 (7 ms)
-[----------] 5 tests from World (63 ms total)
+[----------] 5 tests from World (64 ms total)
 
 [----------] 5 tests from Worldpl
 [ RUN      ] Worldpl.place
-[       OK ] Worldpl.place (13 ms)
+[       OK ] Worldpl.place (12 ms)
 [ RUN      ] Worldpl.place2
-[       OK ] Worldpl.place2 (21 ms)
+[       OK ] Worldpl.place2 (20 ms)
 [ RUN      ] Worldpl.place3
-[       OK ] Worldpl.place3 (8 ms)
+[       OK ] Worldpl.place3 (9 ms)
 [ RUN      ] Worldpl.place4
 [       OK ] Worldpl.place4 (20 ms)
 [ RUN      ] Worldpl.place5
@@ -129,21 +129,21 @@ Running main() from gtest_main.cc
 [ RUN      ] Worldturn.turn6
 [       OK ] Worldturn.turn6 (9 ms)
 [ RUN      ] Worldturn.turn7
-[       OK ] Worldturn.turn7 (13 ms)
+[       OK ] Worldturn.turn7 (12 ms)
 [ RUN      ] Worldturn.turn8
 [       OK ] Worldturn.turn8 (8 ms)
 [ RUN      ] Worldturn.turn9
-[       OK ] Worldturn.turn9 (8 ms)
+[       OK ] Worldturn.turn9 (9 ms)
 [ RUN      ] Worldturn.turn10
-[       OK ] Worldturn.turn10 (8 ms)
+[       OK ] Worldturn.turn10 (9 ms)
 [ RUN      ] Worldturn.turn11
 [       OK ] Worldturn.turn11 (12 ms)
 [ RUN      ] Worldturn.turn12
-[       OK ] Worldturn.turn12 (9 ms)
+[       OK ] Worldturn.turn12 (8 ms)
 [ RUN      ] Worldturn.turn13
-[       OK ] Worldturn.turn13 (9 ms)
+[       OK ] Worldturn.turn13 (8 ms)
 [ RUN      ] Worldturn.turn14
-[       OK ] Worldturn.turn14 (8 ms)
+[       OK ] Worldturn.turn14 (9 ms)
 [ RUN      ] Worldturn.turn15
 [       OK ] Worldturn.turn15 (7 ms)
 [ RUN      ] Worldturn.turn16
@@ -151,7 +151,7 @@ Running main() from gtest_main.cc
 [ RUN      ] Worldturn.turn17
 [       OK ] Worldturn.turn17 (9 ms)
 [ RUN      ] Worldturn.turn18
-[       OK ] Worldturn.turn18 (10 ms)
+[       OK ] Worldturn.turn18 (9 ms)
 [ RUN      ] Worldturn.turn19
 [       OK ] Worldturn.turn19 (16 ms)
 [ RUN      ] Worldturn.turn20
@@ -167,5 +167,5 @@ Running main() from gtest_main.cc
 [----------] 24 tests from Worldturn (305 ms total)
 
 [----------] Global test environment tear-down
-[==========] 69 tests from 9 test cases ran. (807 ms total)
+[==========] 69 tests from 9 test cases ran. (806 ms total)
 [  PASSED  ] 69 tests.
