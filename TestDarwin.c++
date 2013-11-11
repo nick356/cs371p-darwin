@@ -8,7 +8,7 @@ To test the program:
 // --------
 // includes
 // --------
-
+//
 #include <iostream> // cout, endl
 #include <sstream>  // istringtstream, ostringstream
 #include <string>   // ==
@@ -759,4 +759,116 @@ TEST(Worldturn, turn24){
 	map.takeTurn(2,2);
 	assert(map.getName(2,3)=="d");
 
+}
+
+TEST(Worldturn, turn25){
+	World map(4,4);
+	Species dog("d");
+	dog.addInstruction(0,0);
+	Creature b1(dog);
+	map.setCreat(b1,2,2,2);
+	map.takeTurn(2,2);
+	assert(map.getName(2,2)!="d");
+	assert(map.getName(2,3)=="d");
+}
+
+TEST(Worldturn, turn26){
+	World map(5,5);
+	Species dog("d");
+	dog.addInstruction(0,0);
+	Creature b1(dog);
+	Creature b2(dog);
+	map.setCreat(b1,0,2,3);
+	map.setCreat(b2,2,2,2);
+	map.takeTurn(2,2);	
+	map.takeTurn(2,3);
+	assert(map.getName(2,2)=="d");
+	assert(map.getName(2,3)=="d");
+}
+
+TEST(Worldturn, turn27){
+	World map(2,2);
+	Species dog("d");
+	dog.addInstruction(0,0);
+	Creature b1(dog);
+	Creature b2(dog);
+	map.setCreat(b1,3,0,0);
+	map.setCreat(b2,1,1,1);
+	map.takeTurn(0,0);
+	map.takeTurn(1,1);
+	assert(map.getName(1,0)=="d");
+	assert(map.getName(0,1)=="d");
+}
+
+TEST(Misc, misc){
+	Species dog("d");
+	assert(dog.thename()=="d");
+}
+
+TEST(Misc, misc2){
+	Species dog("d");
+	dog.addInstruction(0,0);
+ 	assert(dog.instret(0)==0);		
+}
+
+TEST(Misc, misc3){
+	Species dog("d");
+	dog.addInstruction(0,0);
+	assert(dog.instructjump(0)==0);
+}
+
+TEST(Misc,misc4){
+	Species dog("d");
+	dog.addInstruction(0,0);
+	Creature b1(dog);
+	b1.changeFace(2);
+	b1.changeFace(3);
+	assert(b1.theDirection()=="South");
+}
+
+TEST(Misc,misc5){
+	Species dog("d");
+	dog.addInstruction(0,0);
+	Creature b1(dog);
+	b1.changeFace(2);
+	b1.changeFace(1);
+	b1.changeFace(3);
+	assert(b1.theDirection()=="South");
+}
+
+TEST(Misc,misc6){
+	Species dog("d");
+	dog.addInstruction(0,0);
+	Creature b1(dog);
+	b1.changeFace(0);
+	b1.changeFace(1);
+	b1.changeFace(2);
+	b1.changeFace(3);
+	assert(b1.theDirection()=="South");
+}
+
+TEST(Misc, misc7){
+	Species dog("d");
+	dog.addInstruction(0,0);
+	Creature b1(dog);
+	b1.changeFace(3);
+	b1.changeFace(2);
+	b1.changeFace(1);
+	assert(b1.theDirection()=="North");
+}
+
+TEST(Misc, misc8){
+	Species dog("d");
+	dog.addInstruction(0,0);
+	Creature b1(dog);
+	b1.changeFace(0);
+	assert(b1.theDirection()=="West");
+}
+
+TEST(Misc, misc9){
+	Species dog("d");
+	dog.addInstruction(0,0);
+	Creature b1(dog);
+	b1.changeFace(1);
+	assert(b1.theDirection()=="North");
 }

@@ -14,21 +14,30 @@ class Species{
         vector < vector <int> > move;
 	
    public:
+	/*This is the basiic constructor for the Species class
+	We fix the default constructor by using the trick we loosed in classi
+	*/
+	//First method
          Species(string x="."){
                 name=x;
         }
 
-        void addInstruction(int x,int y=-1){
+	/*We add the instructors here. If it is one of the non-action commands then we use the a negative one for the default */
+        //Second method
+	void addInstruction(int x,int y=-1){
                 vector<int> temp;
                 temp.push_back(x);
                 temp.push_back(y);
                 move.push_back(temp);
         }
-
-        string thename(){
+	/*Returns the name of the species*/
+       //Third method
+	 string thename(){
                 return name;
         }
-	
+	/*Returns the instructions that have been placed in the vector. This was created for checking purposes, but it is probably 
+	somewhere in the code.*/
+	//Fourth method
 	string theInstruction(signed int x){
 		if(x>=move.size())
 			return "That Instruction has not been entered or is unknown.";
@@ -58,20 +67,23 @@ class Species{
 		}
 		return "If you are here something horrible has happened!";
 	}
-
+	/*Returns the actual instruction. We use numbers to keep track of everything.*/
+	//Fifth method
 	int instret(int i){
 		if(move.empty())
 			return -1;		
 		return move[i][0];
 	}
-
+	/*We return where the instruction jumps*/
+	//Sixth method
 	int instructjump(int i){
 		if(move.empty())
 			return -1;
 		return move[i][1];
 
 	}
-	
+	/*Prints the name*/
+	//Seventh method
 	void printit(){
 		cout<<name;
 	}
@@ -90,13 +102,17 @@ class Creature{
 
    public:
 
-        Creature(Species x=Species(), int y=0){
+	/*Creature constroctor, we give it a Species if we aren't given a species we use the default species,and the default
+	direction is set to the west*/
+        //Eighth method
+	Creature(Species x=Species(), int y=0){
                 theSpeci=x;
                 progcout=0;
                 direction=y;
 		turn=0;
         }
-   
+   	/*We change the direction of the Creature*/
+	//Ninth method
         bool changeFace(int x){
 		if(x==0 || x==1 || x==2 || x==3){
                 	direction=x;
@@ -107,7 +123,8 @@ class Creature{
 		else
 			return false;
         }
-
+	/*Infects the species with the species given*/
+	//Tenth method
         bool infected(Species x=Species()){
                 theSpeci=x;
                 progcout=0;
@@ -117,7 +134,8 @@ class Creature{
                 else
                         return false; 
         }
-
+	/*The direction the creature is facing*/
+	//Eleventh method
 	string theDirection(){
 		switch(direction){
 			case 0:
@@ -134,30 +152,38 @@ class Creature{
 		return "If you are here you have a problem";
 
 	} 
-
+	/*Returns the number of the current prognum*/
+	//12th method
 	int prognum(){
 		return progcout;
 	}
-
+	/*Returns the Species*/
+	//13th method
 	Species whtCreat(){
 		return theSpeci;
 	} 
-
+	/*Updates the current prognum*/
+	//14th method
 	void pronum(){
 		progcout++;
 	}
+	/*Updates the prognum, this is used we have to jump to a different command*/
+	//15th method
 	void updat(int x){
 		progcout=x;
 	}
-
+	/*What the current turn*/
+	//16th method
 	int whtrn(){
 		return turn;	
 	}
-
+	/*Increments the current turn. I am not sure whether turn or progcout are  the same thing.*/
+	//17th method
 	void incturn(){
 		turn++;
 	}
-
+	/*Calls the Species print function*/
+	//18th method
 	void callprint(){
 		theSpeci.printit();
 	}
@@ -169,7 +195,9 @@ class World{
       private:
         vector<vector<Creature> > theWorld;
  
-   public:      
+   public: 
+	/*Sets the world map*/
+	//19th method
         World(int height=0, int width=0){
 	Species x;
 	vector<Creature> temp2(height,Creature(x));
@@ -178,8 +206,8 @@ class World{
 	}
 
     }
-//Used this at first but checking the results were difficult, not sure why, don't have time to figure out.
-	string theMap(){
+	//Used this at first but checking the results were difficult, not sure why, don't have time to figure out.
+	/*string theMap(){
 		int x=theWorld.size();
 		int y=theWorld[0].size();
 		string map="";
@@ -191,28 +219,36 @@ class World{
 		}
 		return map;	
 
-	}
-	//Checks Width
+	}*/
+	/*Used to check the Width*/
+	//20th method
 	int theSizeW(){
 		return theWorld.size();
 	}
-	//Checks Height
+	/*Used to check the Height*/
+	//21th method
 	int theSizeH(){
 		return theWorld[0].size();
 	}
+	/*Sets a given Creature on the map, gien coordinates and direction*/
+	//22th method
 	void setCreat(Creature z,int dir, int x, int y){
 		theWorld[x][y].infected(z.whtCreat());
 		theWorld[x][y].changeFace(dir);
 	}
+	/*Get the species name of the give coordinates*/
+	//23th method
 	string getName(int x, int y){
 		return theWorld[x][y].whtCreat().thename();
 	}
-
+	/*Get the actual creature at the given coordinates*/
+	//24th method
 	Creature getCreatu(int x, int y){
 		return theWorld[x][y];
 
 	}
-
+	/*Take a turn at the given coordinates*/
+	//25th method
 	void takeTurn(unsigned int x,unsigned int y){
 		//The instruction that is to be performed
 		int instruction=theWorld[x][y].whtCreat().instret(theWorld[x][y].prognum());
@@ -222,16 +258,16 @@ class World{
 			string face=theWorld[x][y].theDirection();
 			theWorld[x][y].pronum();
 			theWorld[x][y].incturn();
-			if(face=="West" && (y>0)){
+			if(face=="West" && (y>0) && theWorld[x][y-1].whtCreat().thename()=="."){
 				theWorld[x][y-1]=theWorld[x][y];
 				theWorld[x][y].infected();
-			}else if(face=="East" && (y<theWorld[x].size()-1)){
+			}else if(face=="East" && (y<theWorld[x].size()-1)&& theWorld[x][y+1].whtCreat().thename()=="."){
 				theWorld[x][y+1]=theWorld[x][y];
 				theWorld[x][y].infected();
-			}else if(face=="North" && (x>0)){
+			}else if(face=="North" && (x>0)&&theWorld[x-1][y].whtCreat().thename()=="."){
 				theWorld[x-1][y]=theWorld[x][y];
 				theWorld[x][y].infected();
-			}else if(face=="South" && (x<theWorld.size()-1)){
+			}else if(face=="South" && (x<theWorld.size()-1)&&theWorld[x+1][y].whtCreat().thename()=="."){
 				theWorld[x+1][y]=theWorld[x][y];
 				theWorld[x][y].infected();
 			}else{
@@ -311,16 +347,17 @@ class World{
 			}
 		}else if(instruction == 7){
 			string face = theWorld[x][y].theDirection();
-                        if(face == "West" && y>0 && theWorld[x][y-1].whtCreat().thename()!="." && theWorld[x][y-1].whtCreat().thename()!=theWorld[x][y].whtCreat().thename()){
+		        if(face == "West" && y>0 && theWorld[x][y-1].whtCreat().thename()!="." && theWorld[x][y-1].whtCreat().thename()!=theWorld[x][y].whtCreat().thename()){
 				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
                         }else if(face =="East" && y<theWorld[x].size()-1 && theWorld[x][y+1].whtCreat().thename()!="." && theWorld[x][y+1].whtCreat().thename()!=theWorld[x][y].whtCreat().thename()){
 				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
-                        }else if(face == "North" && x>0 && theWorld[x-1][y].whtCreat().thename()!="." && theWorld[x+1][y].whtCreat().thename()!=theWorld[x][y].whtCreat().thename()){
+                        }else if(face == "North" && x>0 && theWorld[x-1][y].whtCreat().thename()!="." && theWorld[x-1][y].whtCreat().thename()!=theWorld[x][y].whtCreat().thename()){
 				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
-                        }else if(face == "South" && x<theWorld.size()-1 && theWorld[x+1][y].whtCreat().thename()!="." && theWorld[x-1][y].whtCreat().thename()!=theWorld[x][y].whtCreat().thename()){
+                        }else if(face == "South" && x<theWorld.size()-1 && theWorld[x+1][y].whtCreat().thename()!="." && theWorld[x+1][y].whtCreat().thename()!=theWorld[x][y].whtCreat().thename()){
 				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
-                        }else
+                        }else{
 				theWorld[x][y].pronum();
+				}
 		}else if(instruction ==8){
 			theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
 		}else {
