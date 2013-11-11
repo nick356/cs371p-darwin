@@ -18,7 +18,7 @@ class Species{
                 name=x;
         }
 
-        void addInstruction(int x,int y){
+        void addInstruction(int x,int y=-1){
                 vector<int> temp;
                 temp.push_back(x);
                 temp.push_back(y);
@@ -29,7 +29,7 @@ class Species{
                 return name;
         }
 	
-	string theInstruction(unsigned int x){
+	string theInstruction(signed int x){
 		if(x>=move.size())
 			return "That Instruction has not been entered or is unknown.";
 		int temp = move[x][0];
@@ -59,6 +59,23 @@ class Species{
 		return "If you are here something horrible has happened!";
 	}
 
+	int instret(int i){
+		if(move.empty())
+			return -1;		
+		return move[i][0];
+	}
+
+	int instructjump(int i){
+		if(move.empty())
+			return -1;
+		return move[i][1];
+
+	}
+	
+	void printit(){
+		cout<<name;
+	}
+
 
 };
 
@@ -69,6 +86,7 @@ class Creature{
         Species theSpeci;
         int direction;
         int progcout;
+	int turn;
 
    public:
 
@@ -76,6 +94,7 @@ class Creature{
                 theSpeci=x;
                 progcout=0;
                 direction=y;
+		turn=0;
         }
    
         bool changeFace(int x){
@@ -89,7 +108,7 @@ class Creature{
 			return false;
         }
 
-        bool infected(Species x){
+        bool infected(Species x=Species()){
                 theSpeci=x;
                 progcout=0;
 
@@ -123,6 +142,25 @@ class Creature{
 	Species whtCreat(){
 		return theSpeci;
 	} 
+
+	void pronum(){
+		progcout++;
+	}
+	void updat(int x){
+		progcout=x;
+	}
+
+	int whtrn(){
+		return turn;	
+	}
+
+	void incturn(){
+		turn++;
+	}
+
+	void callprint(){
+		theSpeci.printit();
+	}
 };
 
 
@@ -132,7 +170,7 @@ class World{
         vector<vector<Creature> > theWorld;
         
    public:      
-        World(int height, int width){
+        World(int height=0, int width=0){
 	Species x;
 	vector<Creature> temp2(height,Creature(x));
 	for(int i=0;i<width;i++){
@@ -141,7 +179,7 @@ class World{
 
     }
 //Used this at first but checking the results were difficult, not sure why, don't have time to figure out.
-/*	string theMap(){
+	string theMap(){
 		int x=theWorld.size();
 		int y=theWorld[0].size();
 		string map="";
@@ -153,7 +191,7 @@ class World{
 		}
 		return map;	
 
-	}*/
+	}
 	//Checks Width
 	int theSizeW(){
 		return theWorld.size();
@@ -162,11 +200,131 @@ class World{
 	int theSizeH(){
 		return theWorld[0].size();
 	}
-	void setCreat(Creature z, int x, int y){
+	void setCreat(Creature z,int dir, int x, int y){
 		theWorld[x][y].infected(z.whtCreat());
+		theWorld[x][y].changeFace(dir);
 	}
 	string getName(int x, int y){
 		return theWorld[x][y].whtCreat().thename();
+	}
+
+	Creature getCreatu(int x, int y){
+		return theWorld[x][y];
+
+	}
+
+	void takeTurn(unsigned int x,unsigned int y){
+		//The instruction that is to be performed
+		int instruction=theWorld[x][y].whtCreat().instret(theWorld[x][y].prognum());
+		//This is where we are suppose to jump to if we are suppose to.
+		//int jump=theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum());
+		if(instruction==0){
+			string face=theWorld[x][y].theDirection();
+			theWorld[x][y].pronum();
+			theWorld[x][y].incturn();
+			if(face=="West" && (y>0)){
+				theWorld[x][y-1]=theWorld[x][y];
+				theWorld[x][y].infected();
+			}else if(face=="East" && (y<theWorld.size()-1)){
+				theWorld[x][y+1]=theWorld[x][y];
+				theWorld[x][y].infected();
+			}else if(face=="North" && (x>0)){
+				theWorld[x-1][y]=theWorld[x][y];
+				theWorld[x][y].infected();
+			}else if(face=="South" && (x<theWorld[x].size()-1)){
+				theWorld[x+1][y]=theWorld[x][y];
+				theWorld[x][y].infected();
+			}
+		}else if(instruction==1){
+			string face=theWorld[x][y].theDirection();
+			theWorld[x][y].pronum();
+			theWorld[x][y].incturn();
+			if(face=="West"){
+                                theWorld[x][y].changeFace(3);
+                        }else if(face=="East"){
+                                theWorld[x][y].changeFace(1);
+                        }else if(face=="North"){
+                                theWorld[x][y].changeFace(0);
+                        }else if(face=="South"){
+                                theWorld[x][y].changeFace(2);
+                        }	
+		}else if(instruction==2){
+			string face=theWorld[x][y].theDirection();
+                        theWorld[x][y].pronum();
+			theWorld[x][y].incturn();
+                        if(face=="West"){
+                                theWorld[x][y].changeFace(1);
+                        }else if(face=="East"){
+                                theWorld[x][y].changeFace(3);
+                        }else if(face=="North"){
+                                theWorld[x][y].changeFace(2);
+                        }else if(face=="South"){
+                                theWorld[x][y].changeFace(0);
+                        }    
+		}else if(instruction==3){
+			string face=theWorld[x][y].theDirection();
+                        theWorld[x][y].pronum();
+			theWorld[x][y].incturn();
+                        if(face=="West" && (y>0)){
+                                theWorld[x][y-1].infected(theWorld[x][y].whtCreat());
+                        }else if(face=="East"&& (y<theWorld[x].size()-1)){
+                                theWorld[x][y+1].infected(theWorld[x][y].whtCreat());
+                        }else if(face=="North" && x>0){
+                                theWorld[x-1][y].infected(theWorld[x][y].whtCreat());
+                        }else if(face=="South" && (x<theWorld[x].size()-1)){
+                                theWorld[x+1][y].infected(theWorld[x][y].whtCreat());
+                        }    
+		}else if(instruction==4){
+			string face=theWorld[x][y].theDirection();
+			if(face=="West" && (y>0) && (theWorld[x][y-1].whtCreat().thename()==".")){
+				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
+                        }else if(face=="East"&& (y<theWorld[x].size()-1) && (theWorld[x][y+1].whtCreat().thename()==".")){
+				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
+                        }else if(face=="North" && (x>0) && (theWorld[x-1][y].whtCreat().thename()==".")){
+				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
+                        }else if(face=="South"&& (x<theWorld[x].size()-1) && (theWorld[x+1][y].whtCreat().thename()==".")){
+				 theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
+                        }else{
+				theWorld[x][y].pronum();
+			}
+				
+		}else if(instruction ==5){
+			string face = theWorld[x][y].theDirection();
+			if(face=="West" && y==0){
+				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
+			}else if(face=="East" && y==theWorld[x].size()-1){
+				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
+			}else if(face=="North" && x==0){
+				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
+			}else if(face=="South" && x==theWorld.size()){
+				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
+			}else{
+				theWorld[x][y].pronum();
+			}
+		}else if(instruction ==6){
+			int i=rand();
+			if((i % 2)!=0){
+				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
+			}else{
+				theWorld[x][y].pronum();	
+			}
+		}else if(instruction == 7){
+			string face = theWorld[x][y].theDirection();
+                        if(face == "West" && y>0 && theWorld[x][y-1].whtCreat().thename()!="." && theWorld[x][y-1].whtCreat().thename()!=theWorld[x][y].whtCreat().thename()){
+				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
+                        }else if(face =="East" && y<theWorld[x].size()-1 && theWorld[x][y+1].whtCreat().thename()!="." && theWorld[x][y+1].whtCreat().thename()!=theWorld[x][y].whtCreat().thename()){
+				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
+                        }else if(face == "North" && x>0 && theWorld[x-1][y].whtCreat().thename()!="." && theWorld[x+1][y].whtCreat().thename()!=theWorld[x][y].whtCreat().thename()){
+				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
+                        }else if(face == "South" && x<theWorld.size()-1 && theWorld[x+1][y].whtCreat().thename()!="." && theWorld[x-1][y].whtCreat().thename()!=theWorld[x][y].whtCreat().thename()){
+				theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
+                        }else
+				theWorld[x][y].pronum();
+		}else if(instruction ==8){
+			theWorld[x][y].updat(theWorld[x][y].whtCreat().instructjump(theWorld[x][y].prognum()));
+		}else {
+			theWorld[x][y].incturn();
+		}
 	}
 };
 #endif

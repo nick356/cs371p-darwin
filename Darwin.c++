@@ -10,91 +10,46 @@
 
 using namespace std;
 
-/*class Species{
 
-   private:
-   	string name;
-   	vector < vector <int> > move;
+class Darwin{
 
+   private:	
+	int turn;
+	World map;	
    public:
-	 Species(string x=""){
-		name=x;
+	Darwin(int turns, World themap){
+		turn=turns;
+		map=themap;
+	}
 
-   	}
+	void runGame(){
+		int tempturn=0;
+		while(tempturn<=turn){
+			cout<<"Turn = "<<tempturn<<"."<<endl;
+			cout<<"  ";
 
-   	void addInstruction(int x,int y){
-		vector<int> temp;
-		temp.push_back(x);
-		temp.push_back(y);
-		move.push_back(temp);
-   	}
-   
-   	string thename(){
-		return name;
-   	}
+			for(int i=0;i<map.theSizeW();i++){
+				for(int j=0;j<map.theSizeH();j++){
+					while(map.getCreatu(i,j).whtrn()<tempturn)
+						map.takeTurn(i,j);
 
+				}
+
+			}
+
+			for(int i=0;i<map.theSizeW();i++)
+				cout<<i;
+
+			cout<<endl;
+			for(int i=0;i<map.theSizeW();i++){
+				cout<<i<<" ";
+				for(int j=0;j<map.theSizeH();j++){
+					map.getCreatu(i,j).callprint();
+				}
+				cout<<endl;
+			}
+			cout<<endl;
+			tempturn++;
+		}
+	}
 };
-
-class Creature{
-	
-   private:
-   	Species theSpeci;
-   	int direction;
-   	int progcout;
-
-   public:
-   	Creature(){
-		direction=0;
-       		progcout=0;
-       		theSpeci=Species();
-
-   	}
-
-   	Creature(Species x){
-		theSpeci=x;
-		progcout=0;
-		direction=0;
-   	}
-   
-   	bool changeFace(int x){
-		direction=x;
-		if(direction==x)
-			return true;
-		else
-			return false;
-   	}
-
-   	bool infected(Species x){
-		theSpeci=x;
-		progcout=0;
-
-		if(theSpeci.thename().compare(x.thename()) == 0 && progcout == 0)
-			return true;
-		else
-			return false; 
-   	}  
-};
-
-
-class World{
-   private:
-    	vector<vector<Creature> > theWorld;
-   	
-   public:	
-	World(int height, int width){
-	vector<Creature> temp2 (width,Creature());
-//	theWorld(height);	
-//
-	vector<vector<Creature> > theWorld(height,temp2);
-    }
-
-
-
-
-
-
-};
-*/
-void Darwin(){
-cout<<"Hi there"<<endl;
-}

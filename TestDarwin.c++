@@ -359,8 +359,8 @@ TEST(Worldpl, place){
 	Creature thing(dog);
 	Creature thing2(cat);
 
-	map.setCreat(thing, 0, 0);
-	map.setCreat(thing2,1,1);	
+	map.setCreat(thing,0,0,0);
+	map.setCreat(thing2,0,1,1);	
 	assert(map.getName(0,0)=="d");
 	assert(map.getName(1,1)=="c");
 }
@@ -377,13 +377,13 @@ TEST(Worldpl, place2){
 	Creature stuff2(cat);
 	Creature stuff3(cat);
 
-	map.setCreat(thing, 0, 0);
-	map.setCreat(thing2,1,1);
-	map.setCreat(thing3,2,2);
-	map.setCreat(thing4,3,3);
-	map.setCreat(stuff,0,1);
-	map.setCreat(stuff2,1,2);
-	map.setCreat(stuff3,5,7);
+	map.setCreat(thing,0, 0, 0);
+	map.setCreat(thing2,0,1,1);
+	map.setCreat(thing3,0,2,2);
+	map.setCreat(thing4,0,3,3);
+	map.setCreat(stuff,0,0,1);
+	map.setCreat(stuff2,0,1,2);
+	map.setCreat(stuff3,0,5,7);
 	assert(map.getName(0,0)=="d");
 	assert(map.getName(5,7)=="c");
 	assert(map.getName(2,2)=="d");
@@ -394,8 +394,8 @@ TEST(Worldpl,place3){
 	World map(7,3);
 	Species dog("d");
 	Species cat("c");
-	map.setCreat(dog,0,6);
-	map.setCreat(cat,2,3);
+	map.setCreat(dog,0,0,6);
+	map.setCreat(cat,0,2,3);
 
 	assert(map.getName(0,6)=="d");
 	assert(map.getName(2,3)=="c");
@@ -414,13 +414,13 @@ TEST(Worldpl,place4){
         Creature stuff2(cat);
         Creature stuff3(cat);
 
-        map.setCreat(thing, 0, 0);
-        map.setCreat(thing2,1,1);
-        map.setCreat(thing3,2,2);
-        map.setCreat(thing4,3,3);
-        map.setCreat(stuff,0,1);
-        map.setCreat(stuff2,1,2);
-        map.setCreat(stuff3,4,7);
+        map.setCreat(thing,0, 0, 0);
+        map.setCreat(thing2,0,1,1);
+        map.setCreat(thing3,0,2,2);
+        map.setCreat(thing4,0,3,3);
+        map.setCreat(stuff,0,0,1);
+        map.setCreat(stuff2,0,1,2);
+        map.setCreat(stuff3,0,4,7);
         assert(map.getName(0,0)=="d");
         assert(map.getName(4,7)=="c");
         assert(map.getName(2,2)=="d");
@@ -438,10 +438,10 @@ TEST(Worldpl,place5){
 	Creature stuff(cat);
 	Creature stuff2(cat);
 
-	map.setCreat(thing,4,4);
-	map.setCreat(thing2,0,0);
-	map.setCreat(stuff,0,4);
-	map.setCreat(stuff2,4,0);
+	map.setCreat(thing,0,4,4);
+	map.setCreat(thing2,0,0,0);
+	map.setCreat(stuff,0,0,4);
+	map.setCreat(stuff2,0,4,0);
 
 	assert(map.getName(0,0)=="d");
 	assert(map.getName(4,4)=="d");
@@ -449,9 +449,314 @@ TEST(Worldpl,place5){
 	assert(map.getName(4,0)=="c");
 }
 
-TEST(Worldpl,place6){
+TEST(Worldturn,turn){
+	World map(4,4);
+	Species dog("d");
+	dog.addInstruction(3,0);
+	Creature b1(dog);
+	//cout<<"Here we are"<<endl;
+	map.setCreat(b1,2,0,0);
+	//cout<<"Turns out we have set it"<<endl;
+	//cout<<map.theMap()<<endl;
+	map.takeTurn(0,0);
+	//cout<<map.theMap()<<endl;
+	assert(map.getName(0,1)==map.getName(0,0));
+}
 
-	World map(1,1);
-	
+TEST(Worldturn,turn2){
+	World map(4,4);
+        Species dog("d");
+        dog.addInstruction(3,0);
+        Creature b1(dog);
+        //cout<<"Here we are"<<endl;
+        map.setCreat(b1,3,0,0);
+        //cout<<"Turns out we have set it"<<endl;
+        //cout<<map.theMap()<<endl;
+        map.takeTurn(0,0);
+        //cout<<map.theMap()<<endl;
+        assert(map.getName(1,0)==map.getName(0,0));
+}
+
+TEST(Worldturn,turn3){
+        World map(4,4);
+        Species dog("d");
+        dog.addInstruction(3,0);
+        Creature b1(dog);
+        //cout<<"Here we are"<<endl;
+        map.setCreat(b1,1,0,0);
+        //cout<<"Turns out we have set it"<<endl;
+        //cout<<map.theMap()<<endl;
+        map.takeTurn(0,0);
+        //cout<<map.theMap()<<endl;
+        assert(map.getName(0,1)!=map.getName(0,0));
+	assert(map.getName(1,0)!=map.getName(0,0));
+}
+
+TEST(Worldturn, turn4){
+	World map(4,4);
+        Species dog("d");
+        dog.addInstruction(0,0);
+        Creature b1(dog);
+        //cout<<"Here we are"<<endl;
+        map.setCreat(b1,2,0,0);
+        //cout<<"Turns out we have set it"<<endl;
+        //cout<<map.theMap()<<endl;
+        map.takeTurn(0,0);
+        //cout<<map.theMap()<<endl;
+        assert(map.getName(0,1)=="d");
+}	
+
+TEST(Worldturn,turn5){
+	World map(4,4);
+        Species dog("d");
+        dog.addInstruction(0,0);
+        Creature b1(dog);
+        map.setCreat(b1,3,0,0);
+        map.takeTurn(0,0);
+        assert(map.getName(1,0)=="d");
+}
+
+TEST(Worldturn,turn6){
+	World map(4,4);
+        Species dog("d");
+        dog.addInstruction(0,0);
+        Creature b1(dog);
+        map.setCreat(b1,0,0,0);
+        map.takeTurn(0,0);
+        assert(map.getName(1,0) != "d" && map.getName(0,1) != "d");
+}
+
+TEST(Worldturn,turn7){
+	World map(4,4);
+        Species dog("d");
+        dog.addInstruction(1,0);
+        Creature b1(dog);
+        map.setCreat(b1,1,0,0);
+        map.takeTurn(0,0);
+        assert(map.getCreatu(0,0).theDirection() == "West");
+}
+
+TEST(Worldturn,turn8){
+ 	World map(4,4);
+        Species dog("d");
+        dog.addInstruction(1,0);
+        Creature b1(dog);
+        map.setCreat(b1,2,0,0);
+        map.takeTurn(0,0);
+        assert(map.getCreatu(0,0).theDirection() == "North");
+}
+
+TEST(Worldturn,turn9){
+        World map(4,4);
+        Species dog("d");
+        dog.addInstruction(1,0);
+        Creature b1(dog);
+        map.setCreat(b1,3,0,0);
+        map.takeTurn(0,0);
+        assert(map.getCreatu(0,0).theDirection() == "East");
+}
+
+TEST(Worldturn,turn10){
+        World map(4,4);
+        Species dog("d");
+        dog.addInstruction(1,0);
+        Creature b1(dog);
+        map.setCreat(b1,0,0,0);
+        map.takeTurn(0,0);
+        assert(map.getCreatu(0,0).theDirection() == "South");
+}
+
+TEST(Worldturn,turn11){
+        World map(4,4);
+        Species dog("d");
+        dog.addInstruction(2,0);
+        Creature b1(dog);
+        map.setCreat(b1,1,0,0);
+        map.takeTurn(0,0);
+        assert(map.getCreatu(0,0).theDirection() == "East");
+}
+
+TEST(Worldturn,turn12){
+        World map(4,4);
+        Species dog("d");
+        dog.addInstruction(2,0);
+        Creature b1(dog);
+        map.setCreat(b1,2,0,0);
+        map.takeTurn(0,0);
+        assert(map.getCreatu(0,0).theDirection() == "South");
+}
+
+TEST(Worldturn,turn13){
+        World map(4,4);
+        Species dog("d");
+        dog.addInstruction(2,0);
+        Creature b1(dog);
+        map.setCreat(b1,3,0,0);
+        map.takeTurn(0,0);
+        assert(map.getCreatu(0,0).theDirection() == "West");
+}
+
+TEST(Worldturn,turn14){
+        World map(4,4);
+        Species dog("d");
+        dog.addInstruction(2,0);
+        Creature b1(dog);
+        map.setCreat(b1,0,0,0);
+        map.takeTurn(0,0);
+        assert(map.getCreatu(0,0).theDirection() == "North");
+}
+
+TEST(Worldturn,turn15){
+	World map(4,4);
+	Species dog("d");
+	dog.addInstruction(3,0);
+	Creature b1(dog);
+	map.setCreat(b1,2,0,0);
+	map.takeTurn(0,0);
+	assert(map.getName(0,1)=="d");
+}
+
+TEST(Worldturn,turn16){
+	World map(4,4);
+        Species dog("d");
+        dog.addInstruction(3,0);
+        Creature b1(dog);
+        map.setCreat(b1,3,0,0);
+        map.takeTurn(0,0);
+        assert(map.getName(1,0)=="d");
+}
+
+TEST(Worldturn,turn17){
+        World map(4,4);
+        Species dog("d");
+        dog.addInstruction(3,0);
+        Creature b1(dog);
+        map.setCreat(b1,1,3,3);
+        map.takeTurn(3,3);
+        assert(map.getName(2,3)=="d");
+}
+
+TEST(Worldturn,turn18){
+        World map(4,4);
+        Species dog("d");
+        dog.addInstruction(3,0);
+        Creature b1(dog);
+        map.setCreat(b1,0,3,3);
+        map.takeTurn(3,3);
+        assert(map.getName(3,2)=="d");
+}
+
+TEST(Worldturn,turn19){
+	World map(4,4);
+	Species dog("d");
+	dog.addInstruction(4,1);
+	dog.addInstruction(0,0);
+	Creature b1(dog);
+	map.setCreat(b1,2,0,0);
+	map.takeTurn(0,0);
+	map.takeTurn(0,0);
+	assert(map.getName(0,1)=="d");
+}
+
+
+TEST(Worldturn,turn20){
+        World map(4,4);
+        Species dog("d");
+        dog.addInstruction(4,3);
+	dog.addInstruction(2,0);
+	dog.addInstruction(8,0);
+	dog.addInstruction(0,0);
+	dog.addInstruction(8,0);
+        Creature b1(dog);
+        map.setCreat(b1,2,0,0);
+        map.takeTurn(0,0);
+        map.takeTurn(0,0);
+	map.takeTurn(0,1);
+	map.takeTurn(0,1);
+	map.takeTurn(0,1);
+        assert(map.getName(0,1)!="d" && map.getName(0,2)=="d");
+}
+
+TEST(Worldturn,turn21){
+        World map(4,4);
+        Species dog("d");
+        dog.addInstruction(4,3);
+        dog.addInstruction(2,0);
+        dog.addInstruction(8,0);
+        dog.addInstruction(0,0);
+        dog.addInstruction(8,0);
+        Creature b1(dog);
+        map.setCreat(b1,2,0,0);
+        map.takeTurn(0,0);
+        map.takeTurn(0,0);
+        map.takeTurn(0,1);
+        map.takeTurn(0,1);
+        map.takeTurn(0,1);
+	map.takeTurn(0,2);
+	map.takeTurn(0,2);
+	map.takeTurn(0,2);
+	map.takeTurn(0,3);
+	map.takeTurn(0,3);
+	map.takeTurn(0,3);
+	map.takeTurn(0,3);
+	map.takeTurn(0,3);
+	map.takeTurn(0,3);
+        assert(map.getName(0,1)!="d" && map.getName(1,3)=="d");
+}
+
+TEST(Worldturn,turn22){
+	World map(4,4);
+	Species dog("d");
+	dog.addInstruction(5,3);
+	dog.addInstruction(0,0);
+	dog.addInstruction(8,0);
+	dog.addInstruction(2,0);
+	dog.addInstruction(8,0);
+	Creature b1(dog);
+	map.setCreat(b1,2,0,3);
+	map.takeTurn(0,3);
+	map.takeTurn(0,3);
+	map.takeTurn(0,3);
+	map.takeTurn(0,3);
+	map.takeTurn(0,3);
+	map.takeTurn(1,3);
+	assert(map.getName(0,3)!="d" && map.getName(1,3)=="d");
+}
+
+TEST(Worldturn, turn23){
+	World map(4,4);
+	Species dog("d");
+	srand(0);
+	dog.addInstruction(6,3);
+	dog.addInstruction(0,0);
+	dog.addInstruction(8,0);
+	dog.addInstruction(1,0);
+	dog.addInstruction(0,0);
+	dog.addInstruction(8,0);
+	Creature b1(dog);
+	map.setCreat(b1,2,2,2);
+	map.takeTurn(2,2);
+	map.takeTurn(2,2);
+	map.takeTurn(2,2);
+	assert(map.getName(1,2)=="d");
+}
+
+TEST(Worldturn, turn24){
+	World map(4,4);
+	Species dog("d");
+	Species cat("c");
+	dog.addInstruction(7,3);
+	dog.addInstruction(0,0);
+	dog.addInstruction(8,0);
+	dog.addInstruction(3,0);
+	dog.addInstruction(8,0);
+	Creature b1(dog);
+	Creature b2(cat);
+	map.setCreat(b1,2,2,2);
+	map.setCreat(b2,2,2,3);
+	map.takeTurn(2,2);
+	map.takeTurn(2,2);
+	map.takeTurn(2,2);
+	assert(map.getName(2,3)=="d");
 
 }

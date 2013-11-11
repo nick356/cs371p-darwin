@@ -6,15 +6,6 @@
 #include <vector>
 #include "Darwin.h"
 
-#define HOP = 0;
-#define LEFT = 1;
-#define RIGHT = 2;
-#define INFECT = 3;
-#define IF_EMPTY = 4;
-#define IF_WALL = 5;
-#define IF_RAND = 6;
-#define IF_ENEMY = 7;
-#define GO = 8;
 
 
 using namespace std;

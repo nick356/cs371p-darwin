@@ -31,7 +31,7 @@ doxygen Doxyfile
 #include <iostream> // cout, endl
 #include <stdexcept> // invalid_argument, out_of_range
 #include "Darwin.h"
-
+#include "Darwin.c++"
 #define HOP 0
 #define LEFT 1
 #define RIGHT 2
@@ -41,6 +41,10 @@ doxygen Doxyfile
 #define IF_RAND 6
 #define IF_ENEMY 7
 #define GO 8
+#define WEST 0
+#define NORTH 1
+#define EAST 2
+#define SOUTH 3
 
 
 // ----
@@ -73,8 +77,8 @@ int main () {
 1: go 0
 */
 	Species hopper("h");
-	food.addInstruction(HOP,0);
-	food.addInstruction(GO,0);
+	hopper.addInstruction(HOP);
+	hopper.addInstruction(GO,0);
     // -----
     // rover
     // -----
@@ -97,13 +101,13 @@ int main () {
 	rover.addInstruction(IF_ENEMY,9);
 	rover.addInstruction(IF_EMPTY,7);
 	rover.addInstruction(IF_RAND,5);
-	rover.addInstruction(LEFT,0);
+	rover.addInstruction(LEFT);
 	rover.addInstruction(GO,0);
-	rover.addInstruction(RIGHT,0);
+	rover.addInstruction(RIGHT);
 	rover.addInstruction(GO,0);
-	rover.addInstruction(HOP,0);
+	rover.addInstruction(HOP);
 	rover.addInstruction(GO,0);
-	rover.addInstruction(INFECT,0);
+	rover.addInstruction(INFECT);
 	rover.addInstruction(GO,0);
 		
 
@@ -121,9 +125,9 @@ int main () {
 
 	Species trap("t");
 	trap.addInstruction(IF_ENEMY,3);
-	trap.addInstruction(LEFT,0);
+	trap.addInstruction(LEFT);
 	trap.addInstruction(GO,0);
-	trap.addInstruction(INFECT,0);
+	trap.addInstruction(INFECT);
 	trap.addInstruction(GO,0);
 
     // ----------
@@ -143,6 +147,22 @@ Food, facing north, at (7, 7)
 Simulate 5 moves.
 Print every grid.
 */
+	World themap(8,8);
+	Creature f1(food);
+	Creature f2(food);
+	Creature h1(hopper);
+	Creature h2(hopper);
+	Creature h3(hopper);
+	Creature h4(hopper);
+	themap.setCreat(f1,EAST,0,0);
+	themap.setCreat(h1,NORTH,3,3);
+	themap.setCreat(h2,EAST,3,4);
+	themap.setCreat(h3,SOUTH,4,4);
+	themap.setCreat(h4,WEST,4,3);
+	themap.setCreat(f2,NORTH,7,7);
+
+	Darwin temp(5,themap);
+	temp.runGame();
         }
     catch (const invalid_argument&) {
         assert(false);}
